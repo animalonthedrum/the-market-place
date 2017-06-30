@@ -35,6 +35,8 @@ myApp.controller('MarketController', function() {
 
   for (var i = 0; i < items.length; i++) {
     var item = new MarketItem(...items[i]);
+    item.price = Math.random() * 9.99;
+    item.price = item.price.toFixed(2);
     vm.itemArray.push(item);
   };
   console.log(vm.itemArray);
