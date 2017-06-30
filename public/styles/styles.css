@@ -1,4 +1,4 @@
-.itemSection{
+.itemSection {
   background-color: gray;
   height: 250px;
   padding: 0 20px;
@@ -9,10 +9,15 @@ button {
   float: left;
 }
 
-.buy{
+.buy {
   background-color: green;
 }
 
 .sell {
   background-color: red;
+}
+
+img {
+  width: 200px;
+  height: 200px;
 }
