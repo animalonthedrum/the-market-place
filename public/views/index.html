@@ -12,18 +12,21 @@
 
 <body ng-app='myApp' ng-controller='MarketController as mc'>
   <h1>Fruit Stand</h1>
-  <h2>Account Balance: $100</h2>
+  <h2>Account Balance: {{mc.balance | currency}}</h2>
   <section class="container">
     <!-- Start Row -->
     <div class="row">
       <div class="col-md-3 " ng-repeat='item in mc.itemArray'>
         <div class="itemSection">
           <h3>{{item.name}}</h3>
+          <h4>{{item.price}}</h4>
           <img ng-src={{item.image}} alt="">
+
         </div>
         <div class="buttonHolder">
+
           <button type="button" name="button" class="sell">Sell</button>
-          <button type="button" name="button" class="buy">Buy</button>
+          <button ng-click='mc.buy($index)' type="button" name="button" class="buy">Buy</button>
 
         </div>
       </div>
