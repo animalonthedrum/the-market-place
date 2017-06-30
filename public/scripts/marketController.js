@@ -40,8 +40,10 @@ myApp.controller('MarketController', function() {
     randomPrice(price) {
       let change = ((Math.random() * 50) - 50) / 100;
       console.log('randomPrice', change, 'before', price);
-      price = price + change;
-      console.log('after', price);
+      // vm.price = this.price + change;
+
+      return this.price + change;
+      // console.log('after', this.price);
     }; //end randomPrice
 
   };
@@ -57,8 +59,8 @@ myApp.controller('MarketController', function() {
     ['Toaster', '../images/toaster.png', 5, 0],
     ['Coin', '../images/coin.png', 5, 0],
     ['Wine', '../images/wine.png', 5, 0],
-    ['Stuffed Animal', '../images/wine.png', 5, 0],
-    ['Jewelry', '../images/wine.png', 5, 0]
+    ['Stuffed Animal', '../images/teddyBear.png', 5, 0],
+    ['Jewelry', '../images/jewelry.png', 5, 0]
   ];
 
 
@@ -80,9 +82,9 @@ myApp.controller('MarketController', function() {
     item.sellItem(index);
   }; //end sell
 
-  vm.change = (price) => {
+  vm.change = () => {
     for (var i = 0; i < vm.itemArray.length; i++) {
-      item.randomPrice(vm.itemArray[i].price);
+      vm.itemArray[i].price = item.randomPrice(vm.itemArray[i].price);
     }
   }; //end change
 }); //end controller
