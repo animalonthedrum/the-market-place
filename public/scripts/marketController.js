@@ -6,6 +6,8 @@ myApp.controller('MarketController', function() {
   vm.itemArray = [];
   vm.balance = 100;
 
+
+
   class MarketItem {
     constructor(name, url, price, inventory) {
       this.name = name;
@@ -15,15 +17,32 @@ myApp.controller('MarketController', function() {
     }
     buyItem(index) {
       let newPrice = vm.itemArray[index].price;
+
       if (vm.balance < newPrice) {
         alert('NO MONEY SUCKA!');
       } else {
-        vm.balance -= newPrice;
+        vm.itemArray[index].inventory++;
+        vm.balance = vm.balance - newPrice;
       }
-    }
-    sellItem(index) {
+    }; //end buyItem
 
-    }
+    sellItem(index) {
+      let newPrice = Number(vm.itemArray[index].price);
+
+      if (vm.itemArray[index].inventory < 1) {
+        alert('Empty Cart');
+      } else {
+        vm.itemArray[index].inventory--;
+        vm.balance = vm.balance + vm.itemArray[index].price;
+      }
+    }; //end sellItem
+
+    randomPrice(price) {
+      let change = ((Math.random() * 50) - 50) / 100;
+      console.log('randomPrice', change, 'before', price);
+      price = price + change;
+      console.log('after', price);
+    }; //end randomPrice
 
   };
 
@@ -47,16 +66,23 @@ myApp.controller('MarketController', function() {
   for (var i = 0; i < items.length; i++) {
     var item = new MarketItem(...items[i]);
     item.price = (Math.random() * 8.99) + 1;
-    item.price = item.price.toFixed(2);
+    item.price = Number(item.price.toFixed(2));
     vm.itemArray.push(item);
-  };
+  }; //end for loop
   console.log(vm.itemArray);
 
   vm.buy = (index) => {
     item.buyItem(index);
     console.log(vm.balance);
-  };
+  }; //end buy
 
+  vm.sell = (index) => {
+    item.sellItem(index);
+  }; //end sell
 
-
+  vm.change = (price) => {
+    for (var i = 0; i < vm.itemArray.length; i++) {
+      item.randomPrice(vm.itemArray[i].price);
+    }
+  }; //end change
 }); //end controller
